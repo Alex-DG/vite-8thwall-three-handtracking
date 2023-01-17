@@ -13,8 +13,8 @@ class _Screen {
     )
     this.instance.rotateX((-Math.PI / 2) * 2)
 
-    this.instance.position.z = camera.position.z * -2
-    scene.add(this.instance)
+    this.instance.position.z = camera.position.z * -4
+    // scene.add(this.instance)
   }
 
   update(cameraTexture) {

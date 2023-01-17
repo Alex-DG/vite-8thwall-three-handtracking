@@ -9,6 +9,7 @@ const IS_DEBUG = false
 
 export const initWorldPipelineModule = () => {
   const cameraTexture = new THREE.Texture()
+  const clock = new THREE.Clock()
 
   const setupTexture = () => {
     cameraTexture.encoding = THREE.sRGBEncoding
@@ -32,9 +33,8 @@ export const initWorldPipelineModule = () => {
 
   const processCpuResult = (data) => {
     const realityTexture = data.processCpuResult?.reality?.realityTexture
-    const intrinsics = data.processCpuResult?.reality?.intrinsics
 
-    if (realityTexture && intrinsics) {
+    if (realityTexture) {
       const { renderer } = XR8.Threejs.xrScene()
       const texProps = renderer.properties.get(cameraTexture)
       texProps.__webglTexture = realityTexture
@@ -42,9 +42,13 @@ export const initWorldPipelineModule = () => {
   }
 
   const update = (data) => {
+    const time = clock.getElapsedTime()
+
     processCpuResult(data)
-    console.log({ data, cameraTexture })
     Screen?.update(cameraTexture)
+
+    Elements?.update(time)
+    Tracking?.update()
   }
 
   return {
