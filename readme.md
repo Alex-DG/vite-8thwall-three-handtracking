@@ -6,6 +6,10 @@
 - Three.js
 - Handtrackjs
 
+## Demo
+
+https://user-images.githubusercontent.com/4311684/213314134-25f9b257-16c1-4d7b-8253-0ada7af387cf.mov
+
 ## Setup
 
 Run the following commands:
