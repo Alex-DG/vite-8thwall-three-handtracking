@@ -4,6 +4,7 @@ import Lights from '../experience/Lights'
 import Debug from '../experience/Debug'
 import Tracking from '../experience/Tracking'
 import Screen from '../experience/Screen'
+import Gallery from '../experience/Gallery'
 
 const IS_DEBUG = false
 
@@ -21,12 +22,18 @@ export const initWorldPipelineModule = () => {
   const init = () => {
     IS_DEBUG && Debug.init()
 
-    setupTexture()
-
     Lights.init()
-    Screen.init()
     Tracking.init()
-    Elements.init()
+
+    // > Images Gallery
+    Gallery.init()
+
+    // > Camera live strean
+    // setupTexture()
+    // Screen.init()
+
+    // > Cubes
+    // Elements.init()
 
     console.log('✨', 'World ready')
   }
@@ -43,11 +50,17 @@ export const initWorldPipelineModule = () => {
 
   const update = (data) => {
     const time = clock.getElapsedTime()
+    Gallery?.update(time)
 
-    processCpuResult(data)
-    Screen?.update(cameraTexture)
+    // > Camera live strean
+    // processCpuResult(data)
+    // Screen?.update(cameraTexture)
 
-    Elements?.update(time)
+    // > Cubes
+    // Elements?.update(time)
+
+    // > Hand tracking
+
     Tracking?.update()
   }
 

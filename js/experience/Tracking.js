@@ -1,6 +1,7 @@
 import * as handTrack from 'handtrackjs'
+import Gallery from './Gallery'
 
-const TRIGGER_VALUE = 15
+const TRIGGER_VALUE = 40
 
 const defaultParams = {
   flipHorizontal: false,
@@ -16,22 +17,29 @@ const defaultParams = {
 }
 
 class _Tracking {
+  updateLayout() {
+    this.label.innerText = this.score
+      ? `${this.hand} / ${this.score}`
+      : `${this.hand}`
+  }
+
   async detectImage() {
     try {
       const predictions = await this.model.detect(this.renderer.domElement)
+      // console.log('->', { predictions })
 
-      let score = null
       if (predictions.length > 0) {
         const prediction = predictions[predictions.length - 1]
         this.hand = prediction.label
-        score = prediction.score
-
-        console.log({ prediction })
+        this.score = prediction.score
       } else {
         this.hand = ''
+        this.score = null
       }
 
-      this.label.innerText = score ? `${this.hand} / ${score}` : `${this.hand}`
+      this.updateLayout()
+
+      Gallery.navigation(this.hand)
 
       // console.log('👋', 'predictions-loaded', { predictions })
     } catch (error) {
@@ -61,6 +69,7 @@ class _Tracking {
     this.ready = false
     this.detecting = false
     this.trigger = 0
+    this.score = null
     this.hand = ''
 
     this.label = document.getElementById('hand-gesture')

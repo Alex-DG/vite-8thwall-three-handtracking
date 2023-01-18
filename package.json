@@ -16,6 +16,7 @@
     "vite-plugin-glsl": "0.5.4"
   },
   "dependencies": {
+    "gsap": "^3.11.4",
     "handtrackjs": "^0.1.5",
     "three": "0.147.0",
     "tweakpane": "^3.1.1"
