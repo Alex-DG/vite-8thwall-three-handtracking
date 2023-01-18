@@ -9,7 +9,7 @@ const defaultParams = {
   maxNumBoxes: 20,
   iouThreshold: 0.2,
   scoreThreshold: 0.6,
-  modelType: 'ssd320fpnlite',
+  modelType: 'ssd640fpnlite',
   modelSize: 'large',
   bboxLineWidth: '2',
   fontSize: 17,
